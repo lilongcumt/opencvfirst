@@ -17,7 +17,7 @@
    <widget class="QPushButton" name="btn_matImage">
     <property name="geometry">
      <rect>
-      <x>1220</x>
+      <x>1180</x>
       <y>80</y>
       <width>141</width>
       <height>41</height>
@@ -38,7 +38,7 @@
    <widget class="QPushButton" name="btn_loadImage">
     <property name="geometry">
      <rect>
-      <x>1220</x>
+      <x>1180</x>
       <y>30</y>
       <width>141</width>
       <height>41</height>
@@ -56,7 +56,7 @@
    <widget class="QPushButton" name="btn_filterImage">
     <property name="geometry">
      <rect>
-      <x>1220</x>
+      <x>1180</x>
       <y>130</y>
       <width>141</width>
       <height>41</height>
@@ -74,7 +74,7 @@
    <widget class="QPushButton" name="btn_findedgeImage">
     <property name="geometry">
      <rect>
-      <x>1220</x>
+      <x>1180</x>
       <y>230</y>
       <width>141</width>
       <height>41</height>
@@ -92,7 +92,7 @@
    <widget class="QPushButton" name="btn_morphologyImage">
     <property name="geometry">
      <rect>
-      <x>1220</x>
+      <x>1180</x>
       <y>280</y>
       <width>141</width>
       <height>41</height>
@@ -110,7 +110,7 @@
    <widget class="QPushButton" name="btn_matchImage">
     <property name="geometry">
      <rect>
-      <x>1220</x>
+      <x>1180</x>
       <y>330</y>
       <width>141</width>
       <height>41</height>
@@ -147,7 +147,7 @@
    <widget class="QPushButton" name="btn_adjustbrightImage">
     <property name="geometry">
      <rect>
-      <x>1220</x>
+      <x>1180</x>
       <y>180</y>
       <width>141</width>
       <height>41</height>

@@ -1,63 +1,51 @@
 #include "imageprocess.h"
+#include <QDebug>
 
 Imageprocess::Imageprocess()
 {
-    m_Image=Mat::zeros(1,1,CV_8UC1);
+
 }
 
-bool Imageprocess::separateImage(const Mat &src, Mat *dst, Range row, Range col)
+bool Imageprocess::filterImage(const Mat &src, Mat *dst,int m_size)
 {
-    if(!src.empty()){
-        *dst=src(row,col).clone();
-        return true;
-    }
-    return false;
-}
 
-bool Imageprocess::adjustBrightness(const Mat &src, Mat *dst, double alpha, double beta)
-{
-    if(src.channels()!=1)
-    {
-        std::cout << "this method only take care of gray value image" << std::endl;
+    if(src.channels()!=1){
+        qDebug()<<"滤波 输入图片不是灰度图片";
         return false;
     }
-    int height=src.rows;
-    int width=src.cols;
+    //高斯滤波
+    //GaussianBlur(src,*dst,Size(m_size,m_size),0,0);
+
+    //中值滤波
+    medianBlur(src,*dst,m_size);
+    //均值滤波
+    //blur(src,*dst,Size(m_size,m_size),Point(-1,-1));
+
+}
+
+bool Imageprocess::adjustbrightImage(const Mat &src, Mat *dst, double alpha, double beta)
+{
+    if(src.channels()!=1){
+        qDebug()<<"调整亮度 输入图片不是灰度图片";
+        return false;
+    }
+    int height = src.rows;
+    int width = src.cols;
     dst->create(src.size(),src.type());
-    for(int y=0;y<height;++y){
-        for(int x=0;x<width;++x){
-            dst->at<uchar>(y,x)=saturate_cast<uchar>(alpha*src.at<uchar>(y,x)+beta);
+    for( int y = 0; y < height; ++y ){
+        for( int x = 0; x < width; ++x ){
+            dst->at<uchar>(y,x) = saturate_cast<uchar>( alpha*src.at<uchar>(y,x) + beta  );
         }
     }
     return true;
 }
 
-bool Imageprocess::findEdge(const Mat &src, Mat *dst, int threshold)
+bool Imageprocess::findedgeImage(const Mat &src, Mat *dst, int m_size1,int )
 {
     if(src.channels()!=1){
-        std::cout << "this method only take care of gray value image" << std::endl;
+        qDebug()<<"寻找边缘 输入图片不是灰度图片";
         return false;
     }
 
-    dst->create(src.size(),src.type());
-    Mat temp(src.size(),src.type());
-    temp=src.clone();
 
-    Canny(temp,*dst,threshold,threshold);
-
-}
-
-bool Imageprocess::morphologyProcess(const Mat &src, Mat *dst, int ksize)
-{
-    if(src.channels()!=1){
-        std::cout << "this method only take care of gray value image" << std::endl;
-        return false;
-    }
-    dst->create(src.size(),src.type());
-
-    Mat element = getStructuringElement(0,Size(ksize,ksize));
-
-    morphologyEx(src,(*dst),MORPH_CLOSE,element);
-
-    return true;
 }
