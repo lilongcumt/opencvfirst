@@ -38,6 +38,10 @@ private slots:
 
     void on_btn_adjustbrightImage_clicked();
 
+    void on_btn_findedgeImage_clicked();
+
+    void on_btn_matchImage_clicked();
+
 private:
     Ui::MainWindow *ui;
     Mat m_Image;

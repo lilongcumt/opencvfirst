@@ -1,5 +1,6 @@
 #include "imageprocess.h"
 #include <QDebug>
+#include <QVector>
 
 Imageprocess::Imageprocess()
 {
@@ -40,12 +41,31 @@ bool Imageprocess::adjustbrightImage(const Mat &src, Mat *dst, double alpha, dou
     return true;
 }
 
-bool Imageprocess::findedgeImage(const Mat &src, Mat *dst, int m_size1,int )
+bool Imageprocess::findedgeImage(const Mat &src, Mat *dst, int threshold1,int threshold2,int apertureSize)
 {
     if(src.channels()!=1){
         qDebug()<<"寻找边缘 输入图片不是灰度图片";
         return false;
     }
+    dst->create(src.size(),src.type());
+    Mat temp(src.size(),src.type());
+    temp=src.clone();
+    Canny(temp,*dst,threshold1,threshold2,apertureSize);
+    return true;
+}
 
+bool Imageprocess::findcircle(const Mat &src, Mat *dst)
+{
+    if(src.channels()!=1){
+        qDebug()<<"寻找边缘 输入图片不是灰度图片";
+        return false;
+    }
+    dst->create(src.size(),src.type());
+    Mat temp(src.size(),src.type());
+    temp=src.clone();
+
+    //vector<Vec3f> circles;//声明一个向量，保存检测出的圆的圆心坐标和半径
+    //HoughCircles(bf, circles, CV_HOUGH_GRADIENT, 1.5, 20, 130, 38, 10, 50);//霍夫变换检测圆
+    HoughCircles(temp,*dst,CV_HOUGH_GRADIENT,1.5, 20, 130, 38, 10, 50);
 
 }

@@ -162,3 +162,22 @@ void MainWindow::on_btn_adjustbrightImage_clicked()
     Imageprocess::adjustbrightImage(m_process->m_Imagefilter,&(m_process->m_Imageadjustbright),alpha,beta);
     showImage(&(m_process->m_Imageadjustbright),(ui->lab_adjustbrightImage),QSize(250,250));
 }
+
+void MainWindow::on_btn_findedgeImage_clicked()
+{
+    int threshold1=150;
+    int threshold2=100;
+    int apertureSize=3;
+    threshold1=ui->lineEdit_threshold1->text().toInt();
+    threshold2=ui->lineEdit_threshold2->text().toInt();
+    apertureSize=ui->comboBox_apertureSize->currentText().toInt();
+
+    Imageprocess::findedgeImage(m_process->m_Imagefilter,&(m_process->m_Imagefindedge),threshold1,threshold2,apertureSize);
+    showImage(&(m_process->m_Imagefindedge),(ui->lab_findedgeImage),QSize(250,250));
+}
+
+void MainWindow::on_btn_matchImage_clicked()
+{
+    Imageprocess::findcircle(m_process->m_Imagefindedge,&(m_process->m_Imagecircle));
+    showImage(&(m_process->m_Imagecircle),(ui->lab_matchImage),QSize(250,250));
+}
